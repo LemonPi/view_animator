@@ -1,0 +1,1 @@
+from view_animator.base_animator import animate_view_in_background
