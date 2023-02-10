@@ -10,17 +10,17 @@ The core of it is an animator object and its `update()` method. You can either `
 manually, or automatically in a separate daemon thread.
 
 Example automatic orbiting animation
+
 ```python
 from view_animator import animate_view_in_background
 from view_animator.pybullet_animator import PybulletOrbitter
 import pybullet as p
 
-
 p.connect(p.GUI)
 # other simulator configurations
 
 # animate an orbit in the background at a distance of 0.5 away from the origin
-orbiter = PybulletOrbitter(update_period=0.01, dist=0.5, target=(0,0,0))
+orbiter = PybulletOrbitter(update_period=0.01, dist=0.5, target=(0, 0, 0))
 animate_view_in_background(orbiter)
 # set up objects
 
@@ -32,6 +32,7 @@ while True:
 ![dO08ur.gif](https://imgpile.com/images/dO08ur.gif)
 
 Manual updating of an RViz orbiter
+
 ```python
 from view_animator.rviz_animator import RVizOrbiter
 import rospy
