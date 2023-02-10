@@ -30,3 +30,37 @@ while True:
     time.sleep(0.001)
 ```
 ![dO08ur.gif](https://imgpile.com/images/dO08ur.gif)
+
+Manual updating of an RViz orbiter
+```python
+from view_animator.rviz_animator import RVizOrbiter
+import rospy
+
+orbiter = RVizOrbiter(period=5, world_frame="world")
+rate = rospy.Rate(1 / orbiter.update_period)
+while not rospy.is_shutdown():
+    # visualization and other processing
+    orbiter.update()
+    rate.sleep()
+```
+## Animators
+While you can subclass `view_animator.base_animator.ViewAnimator` directly to suit your specific environment
+and desired animation, there are a few predefined animators listed below. Note that you do not have to
+have the environment installed to install this package.
+
+### Pybullet
+Install pybullet with
+```pip install pybullet```
+- `view_animator.pybullet_animator.PybulletOrbitter` for orbitting around a position with fixed pitch at a constant rate
+
+### RViz
+Requires the `rviz_animated_view_controller` plugin that can be installed with
+```shell 
+sudo apt install ros-<ros-distro>-rviz-animated-view-controller
+```
+e.g.
+```shell
+sudo apt install ros-noetic-rviz-animated-view-controller
+```
+
+- `view_animator.rviz_animator.RVizOrbitter` for orbitting around a position with fixed pitch at a constant rate
