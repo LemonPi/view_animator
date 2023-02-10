@@ -68,6 +68,18 @@ class ViewAnimator:
         """Environment specific update to change the view. Input is the output of generate_transform."""
 
 
+class Orbiter(ViewAnimator):
+    """Orbits around a target position."""
+
+    def __init__(self, pitch=0, offset_yaw=0, dist=0.8, target=(0, 0, 0), ccw=True, **kwargs):
+        self.pitch = pitch
+        self.offset_yaw = offset_yaw
+        self.dist = dist
+        self.target = target
+        self.ccw = ccw
+        super().__init__(**kwargs)
+
+
 def animate_view_in_background(animator: ViewAnimator):
     """Create a daemon thread to do the animation in the background and return the daemon.
     Stop the animation by setting animator.stopped = True."""

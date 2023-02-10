@@ -1,18 +1,10 @@
-from view_animator.base_animator import ViewAnimator
+from view_animator.base_animator import Orbiter
 import math
 import pybullet as p
 
 
-class PybulletOrbitter(ViewAnimator):
-    """Orbits around a target position in a pybullet environment."""
-
-    def __init__(self, pitch=-48, offset_yaw=0, dist=0.8, target=(0, 0, 0), ccw=True, **kwargs):
-        self.pitch = pitch
-        self.offset_yaw = offset_yaw
-        self.dist = dist
-        self.target = target
-        self.ccw = ccw
-        super().__init__(**kwargs)
+class PybulletOrbiter(Orbiter):
+    """Orbits around a target position in a pybullet environment. Note that angles are expected in degrees."""
 
     def generate_transform(self, dt):
         # pybullet accepts angles in degrees
@@ -21,6 +13,5 @@ class PybulletOrbitter(ViewAnimator):
             yaw *= -1
         return yaw + self.offset_yaw
 
-    def update_transform(self, T):
-        yaw = T
+    def update_transform(self, yaw):
         p.resetDebugVisualizerCamera(self.dist, yaw, self.pitch, self.target)

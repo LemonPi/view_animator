@@ -3,3 +3,4 @@ __pychache__
 *.mp4
 *.gif
 .idea
+*.egg-info
