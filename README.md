@@ -3,7 +3,10 @@ This package allows you to programmatically change the camera view for a variety
 (for example pybullet simulation, and RViz visualization).
 
 ## Installation
-TODO after packaging for PYPI
+```shell
+pip install view-animator
+```
+Each animator may have specific environment installation pre-requisites, listed below.
 
 ## Usage
 The core of it is an animator object and its `update()` method. You can either `update()` the animator
@@ -20,7 +23,8 @@ p.connect(p.GUI)
 # other simulator configurations
 
 # animate an orbit in the background at a distance of 0.5 away from the origin
-orbiter = PybulletOrbitter(update_period=0.01, dist=0.5, target=(0, 0, 0))
+# one orbit will be completed in 10 seconds and by default will loop forever
+orbiter = PybulletOrbitter(update_period=0.01, dist=0.5, target=(0, 0, 0), period=10)
 animate_view_in_background(orbiter)
 # set up objects
 
@@ -37,6 +41,7 @@ Manual updating of an RViz orbiter
 from view_animator.rviz_animator import RVizOrbiter
 import rospy
 
+# the target specified will be relative to the world_frame
 orbiter = RVizOrbiter(period=5, world_frame="world")
 rate = rospy.Rate(1 / orbiter.update_period)
 while not rospy.is_shutdown():

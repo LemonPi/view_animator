@@ -4,3 +4,4 @@ __pychache__
 *.gif
 .idea
 *.egg-info
+dist
